@@ -1,9 +1,3 @@
-trigger:
-- azure
-
-pool:
-    vmImage: 'ubuntu-latest'
-
 stages:
 - stage: BuildApp
   jobs:
@@ -32,6 +26,8 @@ stages:
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
-        appType: 'webAppLinux'
-        WebAppName: 'sanyi-webapp'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        appType: 'webAppContainer'
+        WebAppName: 'sanyilinuxwebappcon'
+        DockerNamespace: 'crsanyi'
+        DockerRepository: 'crsanyi.azurecr.io/mywebapp:v1'
+        DockerImageTag: 'crsanyi.azurecr.io/mywebapp:v1'
