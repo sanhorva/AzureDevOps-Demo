@@ -17,7 +17,7 @@ stages:
         scriptLocation: 'inlineScript'
         addSpnToEnvironment: true
         inlineScript: |
-          ACR_NAME=crSanyi
+          ACR_NAME=crsanyi
           IMAGE_NAME=mywebapp:v1
           docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME -f Dockerfile .
           az acr login --name $ACR_NAME
