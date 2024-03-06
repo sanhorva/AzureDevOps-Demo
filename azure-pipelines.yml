@@ -7,8 +7,8 @@ pool:
 variables:
   ACR_NAME: 'crsanyi'
   IMAGE_NAME: 'mywebapp:v1'
-
-
+  IMAGE_REPOSITORY: 'crsanyi.azurecr.io/mywebapp:v1'
+  TAG: 'crsanyi.azurecr.io/mywebapp:v1'
 
 stages:
 - stage: BuildApp
@@ -39,5 +39,5 @@ stages:
         appType: 'webAppContainer'
         WebAppName: 'sanyilinuxwebappcon'
         DockerNamespace: 'crsanyi'
-        DockerRepository: 'crsanyi.azurecr.io/mywebapp:v1'
-        DockerImageTag: 'crsanyi.azurecr.io/mywebapp:v1'
+        DockerRepository: $IMAGE_REPOSITORY
+        DockerImageTag: $TAG
