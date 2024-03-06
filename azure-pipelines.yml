@@ -19,5 +19,5 @@ stages:
         inlineScript: |
           az acr login --name crSanyi
           docker build -t mywebapp:v1 .
-          docker push crsanyi.azurecr.io/samples/nginx
+          docker push crsanyi.azurecr.io/mywebapp:v1
         
