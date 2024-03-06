@@ -1,24 +1,6 @@
 trigger:
-- main
+- azure
 
 pool:
     vmImage: 'ubuntu-latest'
 
-variables:
-  IMAGE_REGISTRY_CONNECTION: 'ACR Demo'
-  IMAGE_REGISTRY: 'ADODemo'
-  IMAGE_REPOSITORY: 'adodemo.azurecr.io'
-  TAG: '$(Build.BuildId)'
-
-stages:
-- stage: BuildApp
-  jobs: 
-  - job: BuildPushImage
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: '$(IMAGE_REGISTRY_CONNECTION)'
-        repository: '$(IMAGE_REPOSITORY)'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(TAG)'
