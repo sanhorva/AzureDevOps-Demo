@@ -23,3 +23,14 @@ stages:
           az acr login --name $ACR_NAME
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
+- stage: ScanImage
+  jobs:
+  - job: ScanImage
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        scriptType: 'pscore'
+        scriptLocation: 'scriptPath'
+        scriptPath: '$(Build.SourceDirectory)/scripts/ImageScanSummaryAssessmentGate.ps1'
+        arguments: '-registryName crsanyi -repository mywebapp -tag $ACR_NAME.azurecr.io/$IMAGE_NAME'
