@@ -1,3 +1,15 @@
+trigger:
+- azure
+
+pool:
+  vmImage: 'ununtu-latest'
+
+variables:
+  ACR_NAME: 'crsanyi'
+  IMAGE_NAME: 'mywebapp:v1'
+
+
+
 stages:
 - stage: BuildApp
   jobs:
@@ -11,8 +23,6 @@ stages:
         scriptLocation: 'inlineScript'
         addSpnToEnvironment: true
         inlineScript: |
-          ACR_NAME=crsanyi
-          IMAGE_NAME=mywebapp:v1
           docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME -f Dockerfile .
           az acr login --name $ACR_NAME
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
