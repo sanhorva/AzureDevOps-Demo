@@ -34,4 +34,4 @@ stages:
         scriptType: 'pscore'
         scriptLocation: 'scriptPath'
         scriptPath: '$(System.DefaultWorkingDirectory)/scripts/ImageScanSummaryAssessmentGate.ps1'
-        arguments: '-registryName crsanyi -repository mywebapp -tag $ACR_NAME.azurecr.io/$IMAGE_NAME'
+        arguments: '-registryName crsanyi -repository mywebapp -tag crsanyi.azurecr.io/mywebapp:v1'
