@@ -4,3 +4,21 @@ trigger:
 pool:
     vmImage: 'ubuntu-latest'
 
+stages:
+- stage: BuildApp
+  jobs:
+  - job: BuildPushImage
+    steps: 
+    - task: AzureCLI@2
+      displayName: 'Build and push Docker image'
+      inputs:
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        addSpnToEnvironment: true
+        inlineScript: |
+          az login
+          az acr login --name crSanyi
+          az acr build --image sample/hello-world:v1 --registry crSanyi --file Dockerfile .
+          docker push crsanyi.azurecr.io/samples/nginx
+        
