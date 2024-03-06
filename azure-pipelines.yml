@@ -39,5 +39,5 @@ stages:
         appType: 'webAppContainer'
         WebAppName: 'sanyilinuxwebappcon'
         DockerNamespace: 'crsanyi'
-        DockerRepository: $IMAGE_REPOSITORY
-        DockerImageTag: $TAG
+        DockerRepository: '($IMAGE_REPOSITORY)'
+        DockerImageTag: '($TAG)'
