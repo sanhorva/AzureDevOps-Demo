@@ -17,8 +17,7 @@ stages:
         scriptLocation: 'inlineScript'
         addSpnToEnvironment: true
         inlineScript: |
-          az login
           az acr login --name crSanyi
-          az acr build --image sample/hello-world:v1 --registry crSanyi --file Dockerfile .
+          docker build -t mywebapp:v1 .
           docker push crsanyi.azurecr.io/samples/nginx
         
