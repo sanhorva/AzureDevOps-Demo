@@ -2,7 +2,7 @@ trigger:
 - azure
 
 pool:
-    vmImage: 'ununtu-latest'
+    vmImage: 'ubuntu-latest'
 
 variables:
   ACR_NAME: 'crsanyi'
