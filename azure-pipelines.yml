@@ -28,7 +28,7 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
-- stage: BuildAppAWS
+- stage: PushAppAWS
   jobs:
   - job: BuildPushImage
     steps:
