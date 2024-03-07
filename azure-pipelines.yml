@@ -137,5 +137,6 @@ stages:
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
           docker pull interiordesign/demo:$(Version)
           docker run -d -p 8080:80 interiordesign/demo:$(Version)"
+      displayName: 'Deploy Docker Image'
       env:
-        Version: '$(Build.BuildId)'
+        Version: $(TAG)
