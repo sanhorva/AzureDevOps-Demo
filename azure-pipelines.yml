@@ -82,15 +82,15 @@ stages:
 
 - stage: DeployProdAWS
   jobs:
-  - job: ApproveRelease
-    timeoutInMinutes: 4320 # job times out in 3 days
-    pool: server
-    steps:
-    - task: ManualValidation@0
-      timeoutInMinutes: 1440 # task times out in 1 day 
-      inputs:
-        notifyUsers: 'sandor.horvath@zeiss.com'
-        instructions: 'Please validate and approve the deplyoment to prod.'
+  # - job: ApproveRelease
+  #   timeoutInMinutes: 4320 # job times out in 3 days
+  #   pool: server
+  #   steps:
+  #   - task: ManualValidation@0
+  #     timeoutInMinutes: 1440 # task times out in 1 day 
+  #     inputs:
+  #       notifyUsers: 'sandor.horvath@zeiss.com'
+  #       instructions: 'Please validate and approve the deplyoment to prod.'
   - job: DeployProd
     steps:
     - task: DownloadSecureFile@1
