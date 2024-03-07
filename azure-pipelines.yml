@@ -13,7 +13,7 @@ variables:
 stages:
 - stage: BuildApp
   jobs:
-  - job: BuildPushImage
+  - job: BuildPushImageACR
     steps: 
     - task: AzureCLI@2
       displayName: 'Build and push Docker image'
