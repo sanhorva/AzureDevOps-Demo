@@ -121,10 +121,10 @@ stages:
     - task: DownloadSecureFile@1
       name: sshKey
       inputs:
-        secureFile: 'private-key.pem'
+        secureFile: 'private.pem'
     - script: |
         sudo chmod 400 $(sshKey.secureFilePath)
-        ssh -o StrictHostKeyChecking=no -i $(sshKey.secureFilePath) ubuntu@3.79.2.84 "
+        ssh -o StrictHostKeyChecking=no -i $(sshKey.secureFilePath) ubuntu@3.66.170.63 "
           sudo apt update -y && 
           sudo apt install -y docker.io &&
           sudo usermod -aG docker ubuntu && 
