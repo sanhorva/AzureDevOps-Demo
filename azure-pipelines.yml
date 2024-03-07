@@ -28,19 +28,19 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
-- stage: DeployDev
-  jobs:
-  - job: DeployDev
-    steps:
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
-        appType: 'webAppContainer'
-        WebAppName: 'sanyilinuxwebappcon'
-        DockerNamespace: 'crsanyi'
-        DockerRepository: '$(IMAGE_REPOSITORY)'
-        DockerImageTag: '$(TAG)'
+# - stage: DeployDev
+#   jobs:
+#   - job: DeployDev
+#     steps:
+#     - task: AzureRmWebAppDeployment@4
+#       inputs:
+#         ConnectionType: 'AzureRM'
+#         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+#         appType: 'webAppContainer'
+#         WebAppName: 'sanyilinuxwebappcon'
+#         DockerNamespace: 'crsanyi'
+#         DockerRepository: '$(IMAGE_REPOSITORY)'
+#         DockerImageTag: '$(TAG)'
 
 # - stage: DeployTest
 #   condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
