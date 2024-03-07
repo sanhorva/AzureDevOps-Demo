@@ -40,7 +40,7 @@ stages:
         sourceImageName: 'mywebapp:$(Build.BuildId)'
         repositoryName: 'sanyiaws'
     - script: |
-        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/p6l6z3x7 
+        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin public.ecr.aws/p6l6z3x7/sanyiaws
 
 
 # - stage: DeployDev
