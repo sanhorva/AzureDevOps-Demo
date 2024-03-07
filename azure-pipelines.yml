@@ -28,9 +28,9 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
-- stage: PushImageToDockerHub
+- stage: PushImageDockerHub
   jobs:
-  - job: PushDockerHub
+  - job: PushImageDockerHub
     steps:
     - task: Docker@2
       inputs:
