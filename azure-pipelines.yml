@@ -28,6 +28,19 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
+- stage: BuildAppAWS
+  jobs:
+  - job: BuildPushImage
+    steps:
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'aws'
+        regionName: 'eu-central-1'
+        imageSource: 'imagename'
+        sourceImageName: 'mywebapp:$(Build.BuildId)'
+        repositoryName: 'sanyiaws'
+
+
 # - stage: DeployDev
 #   jobs:
 #   - job: DeployDev
