@@ -28,19 +28,29 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
-- stage: PushAppAWS
+- stage: pushimagedockerhub
   jobs:
-  - job: BuildPushImage
+  - job: push
     steps:
-    - task: ECRPushImage@1
+    - task: Docker@2
       inputs:
-        awsCredentials: 'aws'
-        regionName: 'eu-central-1'
-        imageSource: 'imagename'
-        sourceImageName: 'mywebapp:$(Build.BuildId)'
-        repositoryName: 'sanyiaws'
-    - script: |
-        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin public.ecr.aws/p6l6z3x7/sanyiaws
+        containerRegistry: 'dockerhub'
+        repository: 'interiordesign/demo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+# - stage: PushAppAWS
+#   jobs:
+#   - job: BuildPushImage
+#     steps:
+#     - task: ECRPushImage@1
+#       inputs:
+#         awsCredentials: 'aws'
+#         regionName: 'eu-central-1'
+#         imageSource: 'imagename'
+#         sourceImageName: 'mywebapp:$(Build.BuildId)'
+#         repositoryName: 'sanyiaws'
+#     - script: |
+#         aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin public.ecr.aws/p6l6z3x7/sanyiaws
 
 
 # - stage: DeployDev
