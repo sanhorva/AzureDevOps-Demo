@@ -109,7 +109,7 @@ stages:
           $(Build.BuildId)
           latest
 
-          
+
 - stage: DeployProdAWS
   jobs:
   - job: ApproveRelease
@@ -139,4 +139,4 @@ stages:
           docker run -d -p 8080:80 interiordesign/demo:$(Version)"
       displayName: 'Deploy Docker Image'
       env:
-        Version: $(TAG)
+        Version: '$(Build.BuildId)'
