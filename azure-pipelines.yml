@@ -97,9 +97,16 @@ stages:
       name: sshKey
       inputs:
         secureFile: 'private-key.pem'
-    - script: |
-        sudo chmod 400 $(sshKey.secureFilePath)
-        ssh -o StrictHostKeyChecking=no -i $(sshKey.secureFilePath) ubuntu@3.79.2.84 "
+    - task: AzureCLI@2
+      displayName: 'Build and push Docker image'
+      inputs:
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        addSpnToEnvironment: true
+        inlineScript: |
+          sudo chmod 400 $(sshKey.secureFilePath)
+          ssh -o StrictHostKeyChecking=no -i $(sshKey.secureFilePath) ubuntu@3.79.2.84 "
           sudo apt update -y && 
           sudo apt install -y docker.io &&
           sudo usermod -aG docker ubuntu && 
@@ -108,4 +115,4 @@ stages:
           az login --username $(USERNAME) --password $(PASSWORD) &&
           az acr login --name $ACR_NAME &&
           docker pull crsanyi.azurecr.io/mywebapp/crsanyi.azurecr.io/mywebapp:2243520 &&
-          docker run -d -p 8080:80 $(IMAGE_REPOSITORY)/$(IMAGE_REPOSITORY):$(TAG)"
+          docker run -d -p 8080:80 $(IMAGE_REPOSITORY)/$(IMAGE_REPOSITORY):$(TAG) "
