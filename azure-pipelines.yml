@@ -98,7 +98,7 @@ stages:
       inputs:
         secureFile: 'private-key.pem'
     - task: AzureCLI@2
-      displayName: 'Build and push Docker image'
+      displayName: 'Deploy'
       inputs:
         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
         scriptType: 'bash'
