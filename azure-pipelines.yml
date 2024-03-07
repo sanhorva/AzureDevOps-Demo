@@ -41,3 +41,18 @@ stages:
         DockerNamespace: 'crsanyi'
         DockerRepository: '$(IMAGE_REPOSITORY)'
         DockerImageTag: '$(TAG)'
+
+- stage: DeployTest
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
+  jobs:
+  - job: DeployTest
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        appType: 'webAppContainer'
+        WebAppName: 'testsanyilinuxwebapp'
+        DockerNamespace: 'crsanyi'
+        DockerRepository: '$(IMAGE_REPOSITORY)'
+        DockerImageTag: '$(TAG)'
