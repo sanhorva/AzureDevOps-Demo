@@ -28,6 +28,7 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
+
 - stage: PushImageDockerHub
   jobs:
   - job: PushImageDockerHub
@@ -38,6 +39,9 @@ stages:
         repository: 'interiordesign/demo'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
 
 # - stage: PushAppAWS
 #   jobs:
@@ -131,6 +135,7 @@ stages:
           sudo usermod -aG docker ubuntu && 
           sudo systemctl restart docker &&
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
-          docker pull interiordesign/demo:2244069
-          docker run -d -p 8080:80 interiordesign/demo:2244069"
-      
+          docker pull interiordesign/demo:$(Version)
+          docker run -d -p 8080:80 interiordesign/demo:$(Version)"
+      env:
+        Version: '$(Build.BuildId)'
