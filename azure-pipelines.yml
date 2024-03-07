@@ -28,9 +28,9 @@ stages:
           docker tag $IMAGE_NAME $ACR_NAME.azurecr.io/$IMAGE_NAME
           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
 
-- stage: pushimagedockerhub
+- stage: PushImageToDockerHub
   jobs:
-  - job: push
+  - job: PushDockerHub
     steps:
     - task: Docker@2
       inputs:
@@ -38,6 +38,7 @@ stages:
         repository: 'interiordesign/demo'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+
 # - stage: PushAppAWS
 #   jobs:
 #   - job: BuildPushImage
@@ -116,7 +117,7 @@ stages:
   #     inputs:
   #       notifyUsers: 'sandor.horvath@zeiss.com'
   #       instructions: 'Please validate and approve the deplyoment to prod.'
-  - job: DeployProd
+  - job: DeployProdAWS
     steps:
     - task: DownloadSecureFile@1
       name: sshKey
