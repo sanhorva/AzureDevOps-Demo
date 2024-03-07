@@ -131,5 +131,5 @@ stages:
           sudo systemctl restart docker &&
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
           docker image pull interiordesign/demo
-          docker run -d -p 8080:80 interiordesign/demo:latest"
+          docker run -d -p 8080:80 interiordesign/demo"
       
