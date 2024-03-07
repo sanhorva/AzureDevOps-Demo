@@ -54,69 +54,69 @@ stages:
 #         aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin public.ecr.aws/p6l6z3x7/sanyiaws
 
 
-# - stage: DeployDev
-#   jobs:
-#   - job: DeployDev
-#     steps:
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
-#         appType: 'webAppContainer'
-#         WebAppName: 'sanyilinuxwebappcon'
-#         DockerNamespace: 'crsanyi'
-#         DockerRepository: '$(IMAGE_REPOSITORY)'
-#         DockerImageTag: '$(TAG)'
+- stage: DeployDev
+  jobs:
+  - job: DeployDev
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        appType: 'webAppContainer'
+        WebAppName: 'sanyilinuxwebappcon'
+        DockerNamespace: 'crsanyi'
+        DockerRepository: '$(IMAGE_REPOSITORY)'
+        DockerImageTag: '$(TAG)'
 
-# - stage: DeployTest
-#   condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
-#   jobs:
-#   - job: DeployTest
-#     steps:
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
-#         appType: 'webAppContainer'
-#         WebAppName: 'testsanyilinuxwebapp'
-#         DockerNamespace: 'crsanyi'
-#         DockerRepository: '$(IMAGE_REPOSITORY)'
-#         DockerImageTag: '$(TAG)'
+- stage: DeployTest
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'Schedule'))
+  jobs:
+  - job: DeployTest
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        appType: 'webAppContainer'
+        WebAppName: 'testsanyilinuxwebapp'
+        DockerNamespace: 'crsanyi'
+        DockerRepository: '$(IMAGE_REPOSITORY)'
+        DockerImageTag: '$(TAG)'
 
-# - stage: DeployProdAzure
-#   jobs:
-#   - job: ApproveRelease
-#     timeoutInMinutes: 4320 # job times out in 3 days
-#     pool: server
-#     steps:
-#     - task: ManualValidation@0
-#       timeoutInMinutes: 1440 # task times out in 1 day 
-#       inputs:
-#         notifyUsers: 'sandor.horvath@zeiss.com'
-#         instructions: 'Please validate and approve the deplyoment to prod.'
-#   - job: DeployProd
-#     steps:
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
-#         appType: 'webAppContainer'
-#         WebAppName: 'prodsanyilinuxwebapp'
-#         DockerNamespace: 'crsanyi'
-#         DockerRepository: '$(IMAGE_REPOSITORY)'
-#         DockerImageTag: '$(TAG)'
+- stage: DeployProdAzure
+  jobs:
+  - job: ApproveRelease
+    timeoutInMinutes: 4320 # job times out in 3 days
+    pool: server
+    steps:
+    - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day 
+      inputs:
+        notifyUsers: 'sandor.horvath@zeiss.com'
+        instructions: 'Please validate and approve the deplyoment to prod.'
+  - job: DeployProd
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        appType: 'webAppContainer'
+        WebAppName: 'prodsanyilinuxwebapp'
+        DockerNamespace: 'crsanyi'
+        DockerRepository: '$(IMAGE_REPOSITORY)'
+        DockerImageTag: '$(TAG)'
 
 - stage: DeployProdAWS
   jobs:
-  # - job: ApproveRelease
-  #   timeoutInMinutes: 4320 # job times out in 3 days
-  #   pool: server
-  #   steps:
-  #   - task: ManualValidation@0
-  #     timeoutInMinutes: 1440 # task times out in 1 day 
-  #     inputs:
-  #       notifyUsers: 'sandor.horvath@zeiss.com'
-  #       instructions: 'Please validate and approve the deplyoment to prod.'
+  - job: ApproveRelease
+    timeoutInMinutes: 4320 # job times out in 3 days
+    pool: server
+    steps:
+    - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day 
+      inputs:
+        notifyUsers: 'sandor.horvath@zeiss.com'
+        instructions: 'Please validate and approve the deplyoment to prod.'
   - job: DeployProdAWS
     steps:
     - task: DownloadSecureFile@1
