@@ -130,6 +130,6 @@ stages:
           sudo usermod -aG docker ubuntu && 
           sudo systemctl restart docker &&
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
-          docker image pull interiordesign/demo
+          docker pull interiordesign/demo:2244069
           docker run -d -p 8080:80 interiordesign/demo"
       
