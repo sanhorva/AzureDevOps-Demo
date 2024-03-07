@@ -6,7 +6,7 @@ pool:
 
 variables:
   ACR_NAME: 'crsanyi'
-  IMAGE_NAME: 'mywebapp'
+  IMAGE_NAME: 'mywebapp:$(Build.BuildId)'
   IMAGE_REPOSITORY: 'crsanyi.azurecr.io/mywebapp'
   TAG: '$(Build.BuildId)'
 
