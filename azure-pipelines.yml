@@ -134,8 +134,7 @@ stages:
           sudo usermod -aG docker ubuntu && 
           sudo systemctl restart docker &&
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
-          docker pull interiordesign/demo:$(Version)
-          docker run -d -p 8080:80 interiordesign/demo:$(Version)"
+          docker pull interiordesign/demo:$(TAG)
+          docker run -d -p 8080:80 interiordesign/demo:$(TAG)"
       displayName: 'Deploy Docker Image'
-      env:
-        Version: '$(Build.BuildId)'
+
