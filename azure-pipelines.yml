@@ -101,7 +101,7 @@ stages:
         sudo chmod 400 $(sshKey.secureFilePath)
         ssh -o StrictHostKeyChecking=no -i $(sshKey.secureFilePath) ubuntu@3.79.2.84 "
           sudo apt update -y && 
-          sudo apt install -y docker &&
+          sudo apt install -y docker.io &&
           sudo usermod -aG docker ubuntu && 
           docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
           docker run -d -p 8080:80 $(IMAGE_REPOSITORY)/$(IMAGE_REPOSITORY):$(TAG)"
