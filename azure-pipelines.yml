@@ -50,7 +50,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        azureSubscription: '***'
         appType: 'webAppContainer'
         WebAppName: 'sanyilinuxwebappcon'
         DockerNamespace: 'crsanyi'
@@ -65,7 +65,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        azureSubscription: '****'
         appType: 'webAppContainer'
         WebAppName: 'testsanyilinuxwebapp'
         DockerNamespace: 'crsanyi'
@@ -81,14 +81,14 @@ stages:
     - task: ManualValidation@0
       timeoutInMinutes: 1440 # task times out in 1 day 
       inputs:
-        notifyUsers: 'sandor.horvath@zeiss.com'
+        notifyUsers: '****'
         instructions: 'Please validate and approve the deplyoment to prod.'
   - job: DeployProd
     steps:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'ZEISSgroup-DI05-ASM-Learning'
+        azureSubscription: '***'
         appType: 'webAppContainer'
         WebAppName: 'prodsanyilinuxwebapp'
         DockerNamespace: 'crsanyi'
@@ -118,7 +118,7 @@ stages:
     - task: ManualValidation@0
       timeoutInMinutes: 1440 # task times out in 1 day 
       inputs:
-        notifyUsers: 'sandor.horvath@zeiss.com'
+        notifyUsers: '***'
         instructions: 'Please validate and approve the deplyoment to prod.'
   - job: DeployProdAWS
     steps:
